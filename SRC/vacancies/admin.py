@@ -2,6 +2,12 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import vacancy
+from .models import *
 
 admin.site.register(vacancy)
+
+# diliya
+admin.site.register(Cvdetails)
+admin.site.register(Skill)
+admin.site.register(Media)
+admin.site.register(Portfolio)

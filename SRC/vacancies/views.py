@@ -1,8 +1,9 @@
 from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
-from .forms import vacancyform
+from .forms import *
 from .models import *
+from django.template import RequestContext
 
 # Create your views here.
 
@@ -67,3 +68,50 @@ def deleteComVa(request, pk):
     return render(request, 'vacancies/deletecom.html', context)
 
 
+
+def readcvbtn(request):
+    cvdata = Cvdetails.objects.all()
+
+    return render(request, 'CVpages/dil_preBtn.html', {'cvdata': cvdata})
+
+
+
+def ogcreatehtml(request):
+
+    form = CvDetailsForm()
+    if request.method == 'POST':
+        #print('',request.POST)
+        form = CvDetailsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/button')
+
+    context = {'form':form}
+    return render(request, 'CVpages/dilcvcreate.html', context)
+
+
+def updatecv(request, pk):
+
+    cvdata = Cvdetails.objects.get(id=pk)
+    form = CvDetailsForm(instance = cvdata)
+
+    if request.method == 'POST':
+        form = Cvdetails(request.POST, instance = cvdata)
+        if form.is_valid():
+            form.save()
+            return redirect('/button')
+
+    context = {'form':form}
+    return render(request, 'CVpages/dilcvcreate.html', context)
+
+
+def deleteCv(request, pk):
+    cvdata = Cvdetails.objects.get(id=pk)
+
+    if request.method == 'POST':
+            cvdata.delete()
+            return redirect('/button')
+
+
+    context = {'form':cvdata}
+    return render(request, 'CVpages/dilcvdiscard.html', context)

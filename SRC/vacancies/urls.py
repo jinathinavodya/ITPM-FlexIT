@@ -10,9 +10,14 @@ urlpatterns = [
     path('updatecom/<str:pk>/',views.updateComVa, name="updatecom"),
     path('deletecom/<str:pk>/',views.deleteComVa, name="deletecom"),
 
-
-
-
     #path('createvacancy/',views.createvacancy, name="createvacancy"),
+
+
+    # diliya
+
+    path('button/', views.readcvbtn, name="button"),
+    path('ogcreatehtml/', views.ogcreatehtml, name="ogcreatehtml"),
+    path('updatecv/<str:pk>/', views.updatecv, name="updatecv"),
+    path('deletecv/<str:pk>/', views.deleteCv, name="deletecv"),
 
 ]
