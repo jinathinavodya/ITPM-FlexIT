@@ -176,3 +176,77 @@ class Portfolio(models.Model):
 
     def get_absolute_url(self):
         return f"/portfolio/{self.slug}"
+
+
+
+# sathma
+class comregister(models.Model):
+
+ PROVINCE =(
+         ('western','western'),
+         ('central','central'),
+         ('southern','southern'),
+         ('UVA','UVA'),
+         ('sabaragamuwa','sabaragamuwa'),
+         ('north-western','north-western'),
+         ('north-central','north-central'),
+         ('northern','northern'),
+         ('eastern','eastern'),
+ )
+
+# user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+ company_name = models.CharField(max_length=200,null=True)
+ name = models.CharField(max_length=200,null=True)
+ address = models.CharField(max_length=200,null=True)
+ address_line2 = models.CharField(max_length=200,null=True)
+ city = models.CharField(max_length=200,null=True)
+ postal_zip = models.CharField(max_length=200,null=True)
+ province = models.CharField(max_length=200,null=True, choices=PROVINCE)
+ description=models.CharField(max_length=200,null=True)
+ website_url = models.CharField(max_length=200,null=True)
+ business_email = models.CharField(max_length=200,null=True)
+ business_contactNo = models.CharField(max_length=200,null=True)
+ username = models.CharField(max_length=200,null=True)
+ password1 = models.CharField(max_length=200,null=True)
+ password2 = models.CharField(max_length=200,null=True)
+	
+
+ def __str__(self):
+      return self.company_name
+
+
+
+
+class profile(models.Model):
+
+
+ user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+ company_name = models.CharField(max_length=200,null=True)
+ address = models.CharField(max_length=200,null=True)
+ address_line2 = models.CharField(max_length=200,null=True)
+ description=models.CharField(max_length=200,null=True)
+ website_url = models.CharField(max_length=200,null=True)
+ business_email = models.CharField(max_length=200,null=True)
+ business_contactNo = models.CharField(max_length=200,null=True)
+ 
+	
+ def __str__(self):
+      return str(self.user)
+
+
+
+
+def create_profile(sender, instance, created, **kwargs):
+        if created:
+                Profile.objects.create(user=instance)
+                print('Profile Created!')
+
+post_save.connect(create_profile, sender=User)
+
+
+def update_profile(sender, instance, created, **kwargs):
+        if created == False:
+                instance.profile.save()
+                print('Profile updated!')
+
+post_save.connect(update_profile, sender=User)

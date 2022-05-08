@@ -11,3 +11,6 @@ admin.site.register(Cvdetails)
 admin.site.register(Skill)
 admin.site.register(Media)
 admin.site.register(Portfolio)
+
+# sathma
+admin.site.register(comregister)

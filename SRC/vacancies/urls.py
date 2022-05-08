@@ -20,4 +20,12 @@ urlpatterns = [
     path('updatecv/<str:pk>/', views.updatecv, name="updatecv"),
     path('deletecv/<str:pk>/', views.deleteCv, name="deletecv"),
 
+    # sathma
+    path('dashboard/',views.dashboard, name='dashboard'),
+    path('register/',views.Sreg, name='register'),
+    path('comLogin/',views.comLogin, name='loginPage' ),
+    path('comprofile/',views.comprofile, name='comprofile'),
+    path('registerPage/',views.registerPage, name='registerPage' ),
+    path('updateComp/<str:pk>/',views.updateComp, name='updateComp' ),
+
 ]

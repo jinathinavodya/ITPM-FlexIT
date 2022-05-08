@@ -10,8 +10,21 @@ class vacancyform(ModelForm):
             model = vacancy
             fields = '__all__'
 
+# dileeshana
 class CvDetailsForm(ModelForm):
     class Meta:
         model = Cvdetails
         fields = '__all__'
     
+# sathma
+class ComRegisterForm(ModelForm):
+	class Meta:
+		model = comregister
+		fields ='__all__' 
+
+
+class CreateUserForm(UserCreationForm):
+	class Meta:
+		model = User
+		fields = ['username','password1','password2']
+

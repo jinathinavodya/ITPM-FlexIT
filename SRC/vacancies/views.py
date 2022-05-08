@@ -115,3 +115,81 @@ def deleteCv(request, pk):
 
     context = {'form':cvdata}
     return render(request, 'CVpages/dilcvdiscard.html', context)
+
+
+# sathma
+def comLogin(request):
+	# form = ComRegisterForm()
+	if request.method == 'POST':
+		email = request.POST.get('username')
+		password = request.POST.get('password')
+
+		comregister = authenticate(request, email=email, password=password)
+
+		if comregister is not None:
+			login(request, comregister)
+			redirect('/comprofile')
+
+		else:
+			messages.info(request, 'Email OR Password is not correct')	
+
+
+	context={}
+	return render(request,'sprint1/login.html')
+
+
+def registerPage(request):
+	form = ComRegisterForm()
+	if request.method == 'POST':
+		form = ComRegisterForm(request.POST)
+		if form.is_valid():
+			form.save()
+			user = form.cleaned_data.get('company_name')
+			messages.success(request, 'Account was created for ' + user)
+			return redirect('/login')
+
+	context={'form':form}
+	return render(request,'sprint1/register.html',context)
+
+
+
+
+def dashboard(request):
+	return render(request,'sprint1/dashboard.html')
+
+def Sreg(request):
+	return render(request,'sprint1/register.html')
+
+
+
+def comprofile(request):
+
+	company = comregister.objects.all()
+
+	return render(request,'sprint1/comprofile.html', {'company':company})
+
+
+def updateComp(request, pk):
+
+    comp = comregister.objects.get(id=pk)
+    form = ComRegisterForm(instance=comp)
+
+    if request.method == 'POST':
+        #print('printing POST:', request.POST)
+        form = ComRegisterForm(request.POST, instance=comp)
+        if form.is_valid():
+                form.save()
+                return redirect('/comprofile')
+
+    context = {'form':form}
+    return render(request, 'sprint1/register.html',context)
+
+
+def deleteComp(request, pk):
+    comp = comregister.objects.get(id=pk)
+    if request.method == "POST":
+        comp.delete()
+        return redirect('/loginPage')
+
+    context = {'forms':comp}
+    return render(request, 'sprint1/login.html', context)
