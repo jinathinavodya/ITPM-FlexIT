@@ -28,3 +28,9 @@ class CreateUserForm(UserCreationForm):
 		model = User
 		fields = ['username','password1','password2']
 
+
+# pasindu
+class StuUserForm(ModelForm):
+    class Meta:
+        model = Student
+        fields = '__all__'

@@ -14,3 +14,7 @@ admin.site.register(Portfolio)
 
 # sathma
 admin.site.register(comregister)
+
+
+# pasindu
+admin.site.register(Student)

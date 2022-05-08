@@ -25,7 +25,16 @@ urlpatterns = [
     path('register/',views.Sreg, name='register'),
     path('comLogin/',views.comLogin, name='loginPage' ),
     path('comprofile/',views.comprofile, name='comprofile'),
-    path('registerPage/',views.registerPage, name='registerPage' ),
-    path('updateComp/<str:pk>/',views.updateComp, name='updateComp' ),
+    path('registerPage/',views.registerPage, name='registerPage'),
+    path('updateComp/<str:pk>/',views.updateComp, name='updateComp'),
+
+
+
+    # pasindu
+    path('login/', views.login, name="login"),
+    path('register/', views.register, name="register"),
+    path('stuProfile/', views.stuProfile, name="stuProfile"),
+    path('updateStu/<str:pk>/', views.updatestu, name="updateStu"),
+    path('deleteStu/<str:pk>/', views.deletestu, name="deleteStu"),
 
 ]

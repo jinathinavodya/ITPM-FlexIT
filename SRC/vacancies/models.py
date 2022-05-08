@@ -250,3 +250,76 @@ def update_profile(sender, instance, created, **kwargs):
                 print('Profile updated!')
 
 post_save.connect(update_profile, sender=User)
+
+
+
+# pasindu
+class Student(models.Model):
+
+    UNIVERSITY = (
+
+        ('Sri Lanka Institute of Information Technology (SLIIT)','Sri Lanka Institute of Information Technology (SLIIT)'),
+        ('ESOFT Metro Campus','ESOFT Metro Campus'),
+        ('Imperial College of Business Studies','Imperial College of Business Studies'),
+        ('AIC Campus','AIC Campus'),
+        ('Sri Lanka Technological Campus','Sri Lanka Technological Campus'),
+        ('NSBM Green University','NSBM Green University'),
+        ('ICBT Campus','ICBT Campus'),
+        ('NIBM - National Institute of Business Management','NIBM - National Institute of Business Management'),
+        ('CINEC Metro Campus','CINEC Metro Campus'),
+        ('British Institute of Engineering and Technology, Sri Lanka','British Institute of Engineering and Technology, Sri Lanka'),
+        ('IMBS Green Campus','IMBS Green Campus'),
+        ('APIIT Sri Lanka','APIIT Sri Lanka'),
+        ('Informatics Institute of Technology (IIT)','Informatics Institute of Technology (IIT)'),
+        ('KIU','KIU'),
+        ('ACBT Campus','ACBT Campus'),
+        ('General Sir John Kotelawala Defence University','General Sir John Kotelawala Defence University'),
+        ('Horizon Campus','Horizon Campus'),
+        ('American College of Higher Education','American College of Higher Education'),
+        ('Royal Institute of Colombo','Royal Institute of Colombo'),
+    )
+
+    DEGREE = (
+        ('BSc (Hons) in Information Technology - Information Technology', 'BSc (Hons) in Information Technology - Information Technology'),
+        ('BSc (Hons) in Information Technology - Computer Systems & Network Engineering', 'BSc (Hons) in Information Technology - Computer Systems & Network Engineering'),
+        ('BSc (Hons) in Information Technology - Software Engineering','BSc (Hons) in Information Technology - Software Engineering'),
+        ('BSc (Hons) in Information Technology - Information Systems Engineering', 'BSc (Hons) in Information Technology - Information Systems Engineering'),
+        ('BSc (Hons) in Information Technology - Cyber Security', 'BSc (Hons) in Information Technology - Cyber Security'),
+        ('BSc (Hons) in Information Technology - Interactive Media', 'BSc (Hons) in Information Technology - Interactive Media'),
+        ('BSc (Hons) in Information Technology - Data Science', 'BSc (Hons) in Information Technology - Data Science'),
+        ('Master of Science - in Information Technology', 'Master of Science - in Information Technology'),
+        ('Master of Science - in Information Management', 'Master of Science - in Information Management'),
+        ('Master of Science - in Information Systems', 'Master of Science - in Information Systems'),
+        ('Master of Science - in Information Technology – Cyber Security', 'Master of Science - in Information Technology – Cyber Security'),
+        ('Master of Science - in Information Technology – Enterprise Applications Development', 'Master of Science - in Information Technology – Enterprise Applications Development'),
+    )
+
+    STATUS = (
+        ('Undergraduate - Year 1', 'Undergraduate - Year 1'),
+        ('Undergraduate - Year 2', 'Undergraduate - Year 2'),
+        ('Undergraduate - Year 3', 'Undergraduate - Year 3'),
+        ('Undergraduate - Year 4', 'Undergraduate - Year 4'),
+        ('Graduate', 'Graduate'),
+        ('Postgraduate', 'Postgraduate'),
+        ('Graduate - Masters', 'Graduate - Masters'),
+    )
+
+
+    name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    contact_Number = models.CharField(max_length=200)
+    Linkedin_URL = models.CharField(max_length=10000)
+    Date_of_Birth = models.DateField(max_length=200)
+    university = models.CharField(max_length=5000, null=True, choices=UNIVERSITY)
+    degree = models.CharField(max_length=5000, null=True, choices=DEGREE)
+    degree_Status = models.CharField(max_length=5000, null=True, choices=STATUS)
+    nIC = models.CharField(max_length=200, null=True)
+    username = models.CharField(max_length=200, null=True)
+    password = models.CharField(max_length=200, null=True)
+    re_enter_password = models.CharField(max_length=200, null=True)
+    date_Created = models.DateTimeField(auto_now_add=True, null=True)
+
+
+
+    def __str__(self):
+        return self.name

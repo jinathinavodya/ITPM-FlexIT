@@ -193,3 +193,57 @@ def deleteComp(request, pk):
 
     context = {'forms':comp}
     return render(request, 'sprint1/login.html', context)
+
+
+
+
+# pasindu
+def login(request):
+    return render(request, 'flexituser/login.html')
+
+
+
+def register(request):
+
+    form = StuUserForm()
+    if request.method == 'POST':
+        # print ('Printing Post', request.POST)
+        form = StuUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/login')
+
+
+    context = {'form': form} 
+    return render(request, 'flexituser/registration.html', context)  
+
+
+
+def stuProfile(request):
+
+	student = Student.objects.all()
+	return render(request,'flexituser/studentprofile.html', {'student':student})
+
+def updatestu(request, pk):
+
+    stu = Student.objects.get(id=pk)
+    form = StuUserForm(instance=stu)
+
+    if request.method == 'POST':
+        #print('printing POST:', request.POST)
+        form = StuUserForm(request.POST, instance=stu)
+        if form.is_valid():
+                form.save()
+                return redirect('/stuProfile')
+
+    context = {'form':form}
+    return render(request, 'flexituser/registration.html',context)
+
+def deletestu(request, pk):
+    stu = Student.objects.get(id=pk)
+    if request.method == "POST":
+        stu.delete()
+        return redirect('/login')
+
+    context = {'forms':stu}
+    return render(request, 'flexituser/login.html', context)
